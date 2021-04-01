@@ -1,1 +1,1 @@
-web: gunicorn python:app --log-file=-
+web: gunicorn corgis:app --log-file=-
