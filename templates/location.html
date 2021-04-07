@@ -2,9 +2,17 @@
   {% block content %}
 
      <h1>State Location</h1>
+     
+     <form action = "/funFact">
+      <br>
+       <label for = "state">Choose a State:</label>
+       <select name="state" id="state">
+        {{options}}
+       </select>
+       <br><br>
+       <input type="submit" value = "Get A Fun Fact!">
+    </form>
+    <p>{{funFact}}</p>
 
 
-
-    
-    
  {% endblock %}
