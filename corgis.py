@@ -9,7 +9,7 @@ def render_main():
 @app.route('/funFact')  
 def render_fun_fact():
     state_chosen = request.args['state']
-    return render_template('random.html', options=get_state_options(), funFact=fun_fact_by_state(state_chosen))
+    return render_template('location.html', options=get_state_options(), funFact=fun_fact_by_state(state_chosen))
     
 def get_state_options():
     listOfStates = [] #makes an empty list
