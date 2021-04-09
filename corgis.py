@@ -1,4 +1,6 @@
-from flask import Flask, url_for, render_template, request
+from flask import Flask, url_for, render_template, request, Markup
+
+import json
 
 app = Flask(__name__)
 
@@ -8,16 +10,19 @@ def render_main():
 
 @app.route('/funFact')  
 def render_fun_fact():
-    state_chosen = request.args['state']
-    return render_template('location.html', options=get_state_options(), funFact=fun_fact_by_state(state_chosen))
-    
+    if "state" in request.args:
+        state_chosen = request.args['state']
+        return render_template('location.html', options=get_state_options(), funFact=fun_fact_by_state(state_chosen))
+    else:
+        return render_template('location.html', options=get_state_options())
+
 def get_state_options():
     listOfStates = [] #makes an empty list
     with open('real_estate.json') as real_estate_data:
         counties = json.load(real_estate_data)
     for county in counties:
-        if not(county["State"] in listOfStates):
-            listOfStates.append(county["State"])
+        if not(county["location"]["address"]["state"] in listOfStates):
+            listOfStates.append(county["location"]["address"]["state"])
         
     options = ""
     for state in listOfStates:
@@ -25,19 +30,15 @@ def get_state_options():
     return options
     
 def fun_fact_by_state(state):
-    with open('real_estate_data') as estate_data:
+    listOfAddress = []
+    with open('real_estate.json') as estate_data:
         counties = json.load(estate_data)
-    first_county = "ZZZZZZZ"
     for county in counties:
-        if county["County"] < first_county and county["State"] == state:
-            first_county = county["County"]
-    return "In alphabetical order " + first_county + " comes up first!"
-
-
-
-
-
-
-    
+        if county["location"]["address"]["state"] == state:
+            listOfAddress.append (county["location"]["address"]["line 1"])
+        return "Here are the properties within" + state
+        
+        
+        
 if __name__=="__main__":
-    app.run(debug=False)
+    app.run(debug=True)
