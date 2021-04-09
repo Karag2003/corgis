@@ -1,6 +1,6 @@
 from flask import Flask, url_for, render_template
 
-app = Flask(__name__) #__name__ = "__main__" if this is the file that was run.  Otherwise, it is the name of the file (ex. webapp)
+app = Flask(__name__)
 
 @app.route("/")
 def render_main():
@@ -13,8 +13,8 @@ def render_fun_fact():
     
 def get_state_options():
     listOfStates = [] #makes an empty list
-    with open('county_demographics.json') as county_demographics_data:
-        counties = json.load(county_demographics_data)
+    with open('real_estate.json') as real_estate_data:
+        counties = json.load(real_estate_data)
     for county in counties:
         if not(county["State"] in listOfStates):
             listOfStates.append(county["State"])
@@ -25,8 +25,8 @@ def get_state_options():
     return options
     
 def fun_fact_by_state(state):
-    with open('county_demographics.json') as demographics_data:
-        counties = json.load(demographics_data)
+    with open('real_estate_data') as estate_data:
+        counties = json.load(estate_data)
     first_county = "ZZZZZZZ"
     for county in counties:
         if county["County"] < first_county and county["State"] == state:
