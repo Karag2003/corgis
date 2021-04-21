@@ -10,7 +10,7 @@ def render_main():
 
 
 @app.route("/map")
-def render_main():
+def render_map():
     return render_template('maps.html')
 
 
