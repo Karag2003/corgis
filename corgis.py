@@ -8,6 +8,12 @@ app = Flask(__name__)
 def render_main():
     return render_template('home.html')
 
+
+@app.route("/map")
+def render_main():
+    return render_template('maps.html')
+
+
 @app.route('/funFact')  
 def render_fun_fact():
     if "state" in request.args:
@@ -43,12 +49,5 @@ def fun_fact_by_state(state):
     return random + Markup("</ul>")
 
 
-@app.route("/")
-def render_main():
-    return render_template('maps.html')
-
-
-        
-        
 if __name__=="__main__":
     app.run(debug=True)
