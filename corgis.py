@@ -36,8 +36,11 @@ def fun_fact_by_state(state):
     for county in counties:
         if county["location"]["address"]["state"] == state:
             listOfAddress.append (county["location"]["address"]["line 1"])
-        return "Here are the properties within" + state
-        
+    random = Markup("<p>Here are the properties within ") + state + Markup("</p><ul>")
+    
+    for address in listOfAddress:
+        random = random + Markup("<li>" + address + "</li>")
+    return random + Markup("</ul>")
         
         
 if __name__=="__main__":
