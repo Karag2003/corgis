@@ -45,7 +45,7 @@ def fun_fact_by_state(state):
 
 @app.route("/")
 def render_main():
-    return render_template('map.html')
+    return render_template('maps.html')
 
 
         
