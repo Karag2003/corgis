@@ -41,6 +41,13 @@ def fun_fact_by_state(state):
     for address in listOfAddress:
         random = random + Markup("<li>" + address + "</li>")
     return random + Markup("</ul>")
+
+
+@app.route("/")
+def render_main():
+    return render_template('map.html')
+
+
         
         
 if __name__=="__main__":
